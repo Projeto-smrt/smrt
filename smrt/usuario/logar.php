@@ -11,12 +11,12 @@ $sql = "select * from usuario where email = '$email' and senha = '$senha'";
 $retorno = mysqli_query($conexao, $sql);
 $resultado = mysqli_fetch_array($retorno);
 
-$sql1 = "select administrador.id from administrador where adm = $resultado[id]";
+$sql1 = "select administrador.id from administrador where adm = ".$resultado['id'];
 $retorno1 = mysqli_query($conexao, $sql);
 $resultado1 = mysqli_fetch_array($retorno1);
 
-if ($resultado1[id] >= 1) {
-        logar($resultado['nome'], $resultado['sobrenome'], $resultado['email'], $resultado1[id]);
+if ($resultado1['id'] >= 1) {
+    logar($resultado['nome'], $resultado['sobrenome'], $resultado['email'], $resultado1['id']);
     header('Location: /smrt/index.php');
 } else {
     logar($resultado['nome'], $resultado['sobrenome'], $resultado['email']);

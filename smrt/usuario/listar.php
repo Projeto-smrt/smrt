@@ -1,12 +1,22 @@
 <?php
-include '../usuario/autenticacao.php';
-include '../bd/conectar.php';
+include_once '../usuario/autenticacao.php';
+include_once '../bd/conectar.php';
 include_once '../cabecalho.php';
 
 if (adm()) {
-    $sql_denunciado = "select distinct denuncia.denunciado, denuncia.data, usuario.nome, usuario.id, usuario.sobrenome, usuario.email from denuncia inner join usuario on denuncia.denunciado= usuario.id order by nome";
+    $sql_denunciado = "SELECT
+        d.denunciado,
+        d.data,
+        u.nome,
+        u.id,
+        u.sobrenome,
+        u.email
+    FROM 
+        denuncia d
+        INNER JOIN usuario u ON d.denunciado = u.id
+    ORDER BY nome";
     $retorno = mysqli_query($conexao, $sql_denunciado);
-    $adm = mysqli_query($conexao, "select id from usuario where email = $_SESSION[email]");
+    $adm = mysqli_query($conexao, "SELECT id FROM usuario WHERE email = " . $_SESSION['email']);
     ?>
     <div class="d-flex my-3 justify-content-center">
         <div id="accordion" class="container">  

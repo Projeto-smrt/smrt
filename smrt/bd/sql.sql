@@ -59,7 +59,6 @@ create table publicacao(
     titulo varchar(100),
     descricao varchar(100),
     conteudo varchar(255),
--------- localização -----------
     capa blob not null
 );
 <!-- PUBLICAÇÃO -->

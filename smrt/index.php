@@ -1,8 +1,11 @@
 <?php
-require_once './cabecalho.php';
-include '../usuario/autenticacao.php';
-include '../bd/conectar.php';
 
+include_once './usuario/autenticacao.php';
+
+startSession();
+
+require_once './cabecalho.php';
+include_once './bd/conectar.php';
 if (!estaLogado()) {
     ?>
 
@@ -16,12 +19,14 @@ if (!estaLogado()) {
                     <h1>SMRT</h1>        
                     <h3>Bem-vindo ao site de mobitoramento do Rio Tubarão - SC</h3>
                 </hgroup>
-                <div class="btn btn-hero btn-lg" role="button"><a href="usuario/entrar.php" >Cadastre-se</a></i>  </div>
+                <div class="btn btn-hero btn-lg" role="button"><a href="srmt/usuario/entrar.php" >Cadastre-se</a></i>  </div>
             </div>
         </div>
     </div>
 
     <?php
+} else {
+    header("Location: usuario/listar.php");
 }
 require_once 'rodape.php';
 ?>
