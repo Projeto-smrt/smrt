@@ -1,13 +1,13 @@
 <?php
-include '../usuario/autenticacao.php';
-include '../bd/conectar.php';
-include '../cabecalho.php';
+include_once '../usuario/autenticacao.php';
+include_once '../bd/conectar.php';
+include_once '../cabecalho.php';
 
 if (!estaLogado()) {
 	header('Location: entrar.php');
 }
 
-$sql = "SELECT * FROM usuario WHERE email = '$_SESSION[email]'";
+$sql = sprintf("SELECT * FROM usuario WHERE email = '%s'", $_SESSION['email']);
 $resultado = mysqli_query($conexao, $sql);
 $linha = mysqli_fetch_array($resultado);
 
@@ -64,6 +64,9 @@ $retorno_publicacoes = mysqli_query($conexao, $sql_publicacoes);
 <!--				 BOTOES -->
 				<div class="profile-userbuttons">
 					<button type="button" class="btn btn-success btn-sm">Seguir</button>
+					<a href="editar.php">
+						<button type="button" class="btn btn-success btn-sm">Editar</button>
+					</a>
 					<button type="button" class="btn btn-danger btn-sm">Mensagem</button>
 				</div><!--  BOTOES	MENU -->
 				<div class="profile-usermenu">
